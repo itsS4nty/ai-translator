@@ -5,10 +5,12 @@ export const init_cohere = () => {
 }
 
 export const getTranslation = async (toLanguage: string, value: string) => {
+    console.log(value)
+    
     const response = await cohere.generate({
         model: 'xlarge',
         prompt: getPrompt(toLanguage, value),
-        max_tokens: 40,
+        max_tokens: 300,
         temperature: 0.3,
         k: 0,
         p: 1,
@@ -18,6 +20,7 @@ export const getTranslation = async (toLanguage: string, value: string) => {
         return_likelihoods: 'NONE',
     });
     const { text } = response.body.generations[0];
+    console.log(text)
     const match = text.match(/"(.*)"/);
 
     return match ? match[1] : text;

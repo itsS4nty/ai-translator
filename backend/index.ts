@@ -7,7 +7,7 @@ import { getTranslationType } from './types/Request';
 dotenv.config();
 
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 
 init_cohere();
 
@@ -26,6 +26,14 @@ app.get('/gt', (req: Request<{}, {}, {}, getTranslationType>, res: Response) => 
         res.send({
             error: true,
             msg: 'Some data is missing',
+            data: ''
+        });
+        return;
+    }
+    if(value.length > 300) {
+        res.send({
+            error: true,
+            msg: '300 characters maximum',
             data: ''
         });
         return;

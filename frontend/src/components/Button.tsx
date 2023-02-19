@@ -20,7 +20,7 @@ const Button = ({ language, text, setTranslation }: ButtonProps) => {
 
         setLoading(true);
 
-        translateText(language, text).then((res: GetTranslationResponse) => {
+        translateText(language, encodeURI(text)).then((res: GetTranslationResponse) => {
             if(!res || res.error) {
                 showToast(res.msg, 'error');
                 setLoading(false);
@@ -40,12 +40,12 @@ const Button = ({ language, text, setTranslation }: ButtonProps) => {
             ) : (
                 <button
                     className={`bg-blue-600 text-white py-2 px-10 rounded-full shadow-md transition-colors duration-300 ease-in-out select-none ${
-                        text.length <= 0
+                        text.length <= 0 || text.length > 300
                             ? 'opacity-50 cursor-not-allowed'
                             : 'hover:bg-blue-700'
                     }`}
                     onClick={handleOnClick}
-                    disabled={text.length <= 0}
+                    disabled={text.length <= 0 || text.length > 300}
                 >
                     Translate
                 </button>

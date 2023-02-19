@@ -12,7 +12,7 @@ const app = (0, express_1.default)();
 const port = 3030;
 (0, cohere_1.init_cohere)();
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', ''],
+    origin: ['http://localhost:3000', 'https://ai-translator.santy-dev.com/'],
     optionsSuccessStatus: 200,
 }));
 app.get('/', (req, res) => {
@@ -24,6 +24,7 @@ app.get('/gt', (req, res) => {
         res.send({
             error: true,
             msg: 'Some data is missing',
+            data: ''
         });
         return;
     }

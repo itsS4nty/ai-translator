@@ -5,6 +5,7 @@ type TextBoxProps = {
 }
 
 const InputBox = ({ setValue }: TextBoxProps) => {
+    const [valueLength, setValueLength] = useState<number>(0);
     return (
         <div className='flex items-center justify-center md:min-h-screen'>
             <div className='max-w-md w-full mx-4'>
@@ -24,8 +25,10 @@ const InputBox = ({ setValue }: TextBoxProps) => {
                             if (e.target.scrollHeight > 600)
                                 e.target.style.overflow = 'auto';
                             setValue(e.target.value);
+                            setValueLength(e.target.value.length);
                         }}
                     />
+                    { valueLength > 300 && <span className='absolute text-red-500'>300 characters maximum</span>}
                 </div>
             </div>
         </div>
