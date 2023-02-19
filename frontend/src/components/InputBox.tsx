@@ -6,7 +6,7 @@ type TextBoxProps = {
 
 const InputBox = ({ setValue }: TextBoxProps) => {
     return (
-        <div className='flex items-center justify-center min-h-screen'>
+        <div className='flex items-center justify-center md:min-h-screen'>
             <div className='max-w-md w-full mx-4'>
                 <div className='relative'>
                     <textarea
@@ -18,7 +18,6 @@ const InputBox = ({ setValue }: TextBoxProps) => {
                             overflow: 'hidden',
                         }}
                         onInput={(e: any) => {
-                            console.log('first')
                             e.target.style.height = 'auto';
                             e.target.style.height =
                                 e.target.scrollHeight + 'px';

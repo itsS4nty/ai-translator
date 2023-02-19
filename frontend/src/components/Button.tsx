@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { translateText } from '../services/ai';
+import { translateText } from '../services/api';
+import { GetTranslationResponse } from '../types/getTranslation';
+import { showToast } from '../utils/showToast';
 
 type ButtonProps = {
     language: string;
     text: string;
     setTranslation: (value: string) => void;
 };
+
+
 
 const Button = ({ language, text, setTranslation }: ButtonProps) => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -16,8 +20,13 @@ const Button = ({ language, text, setTranslation }: ButtonProps) => {
 
         setLoading(true);
 
-        translateText(text, language).then((res: string) => {
-            setTranslation(res);
+        translateText(language, text).then((res: GetTranslationResponse) => {
+            if(!res || res.error) {
+                showToast(res.msg, 'error');
+                setLoading(false);
+                return;
+            }
+            setTranslation(res.data);
             setLoading(false);
         });
     };

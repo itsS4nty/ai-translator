@@ -1,29 +1,11 @@
-import { COHERE_API_KEY } from '../API_KEY';
-const COHERE_API_DETECT_LANGUAGE_URL = 'https://api.cohere.ai/detect-language';
-const COHERE_API_GENERATE_URL = 'https://api.cohere.ai/generate';
+import cohere from "cohere-ai";
 
-export const getLanguage = async (value: string) => {
-    const data = {
-        texts: [value],
-    };
+export const init_cohere = () => {
+    cohere.init(process.env.COHERE_API_KEY ?? '');
+}
 
-    const { results } = await fetch(COHERE_API_DETECT_LANGUAGE_URL, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            Authorization: `BEARER ${COHERE_API_KEY}`,
-            'Content-Type': 'application/json',
-            'Cohere-Version': '2022-12-06',
-        },
-        body: JSON.stringify(data),
-    }).then((res) => res.json());
-
-    const [{ language_code }] = results;
-    return language_code;
-};
-
-export const translateText = async (value: string, toLanguage: string): Promise<string> => {
-    const data = {
+export const getTranslation = async (toLanguage: string, value: string) => {
+    const response = await cohere.generate({
         model: 'xlarge',
         prompt: getPrompt(toLanguage, value),
         max_tokens: 40,
@@ -34,28 +16,15 @@ export const translateText = async (value: string, toLanguage: string): Promise<
         presence_penalty: 0,
         stop_sequences: ['--'],
         return_likelihoods: 'NONE',
-    };
-
-    const response = await fetch(COHERE_API_GENERATE_URL, {
-        method: 'POST',
-        headers: {
-            Authorization: `BEARER ${COHERE_API_KEY}`,
-            'Content-Type': 'application/json',
-            'Cohere-Version': '2022-12-06',
-        },
-        body: JSON.stringify(data),
-    }).then((res) => res.json());
-
-    const { text } = response.generations[0];
-
+    });
+    const { text } = response.body.generations[0];
     const match = text.match(/"(.*)"/);
 
     return match ? match[1] : text;
-};
+}
 
 const getPrompt = (language: string, value: string) => {
     language ??= 'en';
-    console.log(language)
     const prompt_values: any = {
         de: {
             first_value: 'Mein Name ist Santy',

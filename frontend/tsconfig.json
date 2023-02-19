@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/API_KEY.TS"  ]
+, "src/API_KEY.ts"  ]
 }
