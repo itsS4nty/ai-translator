@@ -1,6 +1,5 @@
 import { toast, TypeOptions } from 'react-toastify';
 
-
 export const showToast = (msg: string, type: TypeOptions) => {
     toast(msg, {
         position: 'bottom-center',

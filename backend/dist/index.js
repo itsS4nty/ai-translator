@@ -9,21 +9,27 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cohere_1 = require("./service/cohere");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const port = 3030;
+const port = process.env.PORT || 3030;
 (0, cohere_1.init_cohere)();
-app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', 'https://ai-translator.santy-dev.com/'],
-    optionsSuccessStatus: 200,
-}));
+app.use((0, cors_1.default)());
 app.get('/', (req, res) => {
     res.send('Welcome to my AI Translator API!');
 });
 app.get('/gt', (req, res) => {
+    console.log('Hola que al');
     const { toLanguage, value } = req.query;
     if (!toLanguage || !value) {
         res.send({
             error: true,
             msg: 'Some data is missing',
+            data: ''
+        });
+        return;
+    }
+    if (value.length > 300) {
+        res.send({
+            error: true,
+            msg: '300 characters maximum',
             data: ''
         });
         return;

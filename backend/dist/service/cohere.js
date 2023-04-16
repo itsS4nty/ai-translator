@@ -20,7 +20,6 @@ const init_cohere = () => {
 };
 exports.init_cohere = init_cohere;
 const getTranslation = (toLanguage, value) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(value);
     const response = yield cohere_ai_1.default.generate({
         model: 'xlarge',
         prompt: getPrompt(toLanguage, value),
@@ -34,7 +33,6 @@ const getTranslation = (toLanguage, value) => __awaiter(void 0, void 0, void 0, 
         return_likelihoods: 'NONE',
     });
     const { text } = response.body.generations[0];
-    console.log(text);
     const match = text.match(/"(.*)"/);
     return match ? match[1] : text;
 });

@@ -9,8 +9,6 @@ type ButtonProps = {
     setTranslation: (value: string) => void;
 };
 
-
-
 const Button = ({ language, text, setTranslation }: ButtonProps) => {
     const [loading, setLoading] = useState<boolean>(false);
 
