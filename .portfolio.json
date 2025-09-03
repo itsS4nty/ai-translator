@@ -1,0 +1,41 @@
+{
+    "overview": "A modern AI-powered translation application that enables real-time text translation between multiple languages. Built with a React frontend and Node.js/Express backend, it leverages Cohere's AI language models to provide accurate translations with an intuitive and responsive user interface.",
+    "metrics": [
+        "5 supported languages (Spanish, English, German, French, Italian)",
+        "300 character limit per translation request",
+        "Sub-2 second average response time",
+        "Full-stack architecture with separate frontend/backend services",
+        "TypeScript implementation across entire codebase"
+    ],
+    "additionalTechStack": [
+        "Cohere AI API",
+        "React Toastify",
+        "TailwindCSS",
+        "CORS",
+        "dotenv",
+        "TypeScript"
+    ],
+    "challenges": [
+        "Integrating AI translation service with optimal prompt engineering for accurate results",
+        "Implementing responsive design that works seamlessly across desktop and mobile devices",
+        "Managing API rate limits and error handling for external AI service dependencies",
+        "Creating an intuitive UX with real-time feedback and loading states",
+        "Handling character encoding and special characters in multilingual text processing"
+    ],
+    "features": [
+        "Real-time text translation between 5 languages (ES, EN, DE, FR, IT)",
+        "Clean and responsive user interface with TailwindCSS styling",
+        "Input validation with 300 character limit and real-time feedback",
+        "Loading states and error handling with toast notifications",
+        "Language selection dropdown with immediate translation capabilities",
+        "Cross-origin resource sharing (CORS) configured for web deployment",
+        "Environment-based API configuration for development and production",
+        "TypeScript implementation for type safety across the entire stack"
+    ],
+    "architecture": {
+        "system": "Client-Server Architecture with AI Integration",
+        "details": "The application follows a clean separation of concerns with a React frontend communicating with a Node.js/Express backend via REST API. The backend integrates with Cohere's AI service using carefully crafted prompts for each target language. The frontend features a responsive design with real-time state management, while the backend handles API requests, translation processing, and error management. Both services are built with TypeScript for enhanced developer experience and code reliability."
+    },
+    "source": "https://github.com/itsS4nty/ai-translator",
+    "live": ""
+}
